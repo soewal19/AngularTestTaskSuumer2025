@@ -1,0 +1,18 @@
+<div class="analyzer-container">
+  <textarea #textarea [value]="text()" (input)="onTextChange($event)" rows="8" class="analyzer-textarea"></textarea>
+  <div class="analyzer-actions">
+    <button mat-raised-button color="primary" (click)="onGetSynonyms()">Получить синонимы</button>
+    <button mat-raised-button color="accent" (click)="copyText()">Скопировать текст</button>
+  </div>
+  <div class="analyzer-stats">
+    <span>Символов: {{ charCount() }}</span>
+    <span>Слов: {{ wordCount() }}</span>
+  </div>
+  <div *ngIf="synonyms().length || synonymsFetched()" class="analyzer-synonyms animate-fade-in">
+    <span *ngIf="synonyms().length">Синонимы:</span>
+    <ng-container *ngFor="let syn of synonyms()">
+      <button mat-stroked-button (click)="onReplaceSynonym(syn)">{{ syn }}</button>
+    </ng-container>
+    <span *ngIf="!synonyms().length">Синонимы не найдены</span>
+  </div>
+</div>
