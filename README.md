@@ -1,59 +1,135 @@
-# TextAnalyzer
+# Text Analyzer Web App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
+## Project Description
 
-## Development server
+Text Analyzer is a modern Angular web application for analyzing and editing text with interactive synonym replacement, word/character statistics, and clipboard support. It features a clean UI (Angular Material + Tailwind CSS), e2e tests, Docker support, and CI/CD integration for Azure Web App.
 
-To start a local development server, run:
+## Project Folder Structure (Tree)
 
-```bash
-ng serve
+```
+TestTaskAngular/
+├── text-analyzer/
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── components/
+│   │   │   │   └── text-analyzer/
+│   │   │   │       ├── text-analyzer.ts
+│   │   │   │       └── text-analyzer.html
+│   │   │   └── services/
+│   │   │       └── synonym.ts
+│   │   └── environments/
+│   │       └── environment.ts
+│   ├── app.config.ts
+│   ├── Dockerfile
+│   ├── nginx.conf
+│   └── ...
+├── e2e/
+│   └── text-analyzer.cy.ts
+├── CI_CD/
+│   └── ...
+├── .azure-pipelines.yml
+├── README.md
+└── ...
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Key Files Description (English)
 
-## Code scaffolding
+- **text-analyzer/text-analyzer.ts** — Main Angular component. Contains all logic for text input, synonym fetching and replacement, statistics, clipboard operations, and uses Angular signals for state management.
+- **text-analyzer/text-analyzer.html** — UI template: textarea for input, action buttons, synonym list, and statistics display.
+- **services/synonym.ts** — Angular service for interacting with the Datamuse API to fetch synonyms for selected words or phrases.
+- **environments/environment.ts** — Environment variables for the Angular app (e.g., API base URL).
+- **app.config.ts** — Application configuration, providers, and module setup for Angular.
+- **e2e/text-analyzer.cy.ts** — Cypress end-to-end tests covering all main user scenarios and flows.
+- **Dockerfile, nginx.conf** — Dockerfile for building the production container and nginx.conf for serving the Angular app as a static site.
+- **.azure-pipelines.yml, CI_CD/** — Azure Pipeline configuration and CI/CD scripts for automated build, test, and deployment to Azure Web App.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
+## English
+
+### Features
+- Enter and edit text
+- Get synonyms for selected words/phrases (Datamuse API)
+- Replace selected word/phrase with synonym
+- Character and word count
+- Copy all text to clipboard
+- Modern UI (Angular Material)
+- Docker & Azure CI/CD ready
+
+### Usage
+1. Clone the repo
+2. `npm install`
+3. `ng serve` (dev) or build Docker image
+4. For Docker: `docker build -t text-analyzer . && docker run -p 4200:80 text-analyzer`
+
+### Environment variables
+- `API_BASE_URL` — Datamuse API base URL (default: https://api.datamuse.com)
+
+### CI/CD
+- Azure Pipelines: see `.azure-pipelines.yml`
+
+---
+
+## Русский
+
+### Возможности
+- Ввод и редактирование текста
+- Получение синонимов для выделенных слов/фраз (Datamuse API)
+- Замена выделенного слова/фразы на синоним
+- Подсчёт символов и слов
+- Копирование всего текста в буфер обмена
+- Современный UI (Angular Material)
+- Docker и Azure CI/CD
+
+### Использование
+1. Клонируйте репозиторий
+2. `npm install`
+3. `ng serve` (для разработки) или сборка Docker-образа
+4. Для Docker: `docker build -t text-analyzer . && docker run -p 4200:80 text-analyzer`
+
+### Переменные окружения
+- `API_BASE_URL` — базовый URL Datamuse API (по умолчанию: https://api.datamuse.com)
+
+### CI/CD
+- Azure Pipelines: см. `.azure-pipelines.yml` 
+
+## Project Diagram
+
+```mermaid
+graph TD;
+  A[User Interface (Angular)] -->|Input/Select Text| B[TextAnalyzerComponent];
+  B -->|Fetch Synonyms| C[SynonymService];
+  C -->|HTTP Request| D[Datamuse API];
+  B -->|Show Synonyms/Replace| A;
+  B -->|Show Stats/Copy| A;
+  B -->|State| E[Signals];
+  E --> B;
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Key Files Description
 
-```bash
-ng generate --help
-```
+- **src/app/components/text-analyzer/text-analyzer.ts**  
+  Main component. Handles text input, selection, synonym fetching, replacement, statistics, and clipboard. Uses Angular signals for state.
 
-## Building
+- **src/app/components/text-analyzer/text-analyzer.html**  
+  Template for the main UI: textarea, buttons, synonym list, stats.
 
-To build the project run:
+- **src/app/services/synonym.ts**  
+  Service for interacting with the Datamuse API to fetch synonyms.
 
-```bash
-ng build
-```
+- **src/environments/environment.ts**  
+  Stores environment variables (e.g., API base URL).
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- **src/app/app.config.ts**  
+  Angular app configuration, providers, and module setup.
 
-## Running unit tests
+- **e2e/text-analyzer.cy.ts**  
+  Cypress end-to-end tests for all main user flows.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- **Dockerfile, nginx.conf**  
+  For containerization and static serving in production.
 
-```bash
-ng test
-```
+- **.azure-pipelines.yml, CI_CD/**  
+  CI/CD pipeline and scripts for Azure deployment.
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+--- 
