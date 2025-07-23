@@ -93,18 +93,7 @@ TestTaskAngular/
 ### CI/CD
 - Azure Pipelines: см. `.azure-pipelines.yml` 
 
-## Project Diagram
 
-```mermaid
-graph TD;
-  A[User Interface (Angular)] -->|Input/Select Text| B[TextAnalyzerComponent];
-  B -->|Fetch Synonyms| C[SynonymService];
-  C -->|HTTP Request| D[Datamuse API];
-  B -->|Show Synonyms/Replace| A;
-  B -->|Show Stats/Copy| A;
-  B -->|State| E[Signals];
-  E --> B;
-```
 
 ### Key Files Description
 
